@@ -30,9 +30,37 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+      /*
+      what do we want to change when using a click handler
+      when clicking videoList items, we expect:
+        videoPlayer to render new video
+          new video consists of:
+            link
+            title
+            description
+        return the above
+      */
+      /*
+     states that change, from what we can see:
+      link: props.id.videoId
+      title: props.snippet.title
+      description: props.snippet.description
+      */
+      // this.setState(event.target.)
+      currentVideo: this.props.exampleVideoData[0],
+      videos: this.props.exampleVideoData
 
     };
+    this.onVideoListClick = this.onVideoListClick.bind(this);
   }
+
+  onVideoListClick(event) {
+    // console.log(event.target.value);
+    this.setState({
+      currentVideo: event
+    }, console.log(event));
+  }
+
 
   render() {
     return (
@@ -44,11 +72,11 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer video={exampleVideoData[1]}/>
+            <VideoPlayer video={this.state.currentVideo}/>
           </div>
           <div className="col-md-5">
             <div>
-              <VideoList videos={exampleVideoData}/>
+              <VideoList videos={this.state.videos} click={this.onVideoListClick}/>
             </div>
           </div>
         </div>
