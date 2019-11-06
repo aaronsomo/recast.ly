@@ -1,4 +1,4 @@
-// import Search from './Search.js';
+import Search from './Search.js';
 import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
 import exampleVideoData from '../data/exampleVideoData.js';
@@ -48,10 +48,11 @@ class App extends React.Component {
       */
       // this.setState(event.target.)
       currentVideo: this.props.exampleVideoData[0],
-      videos: this.props.exampleVideoData
-
+      videos: this.props.exampleVideoData,
+      query: ''
     };
     this.onVideoListClick = this.onVideoListClick.bind(this);
+    this.changeHandle = this.changeHandle.bind(this);
   }
 
   onVideoListClick(event) {
@@ -61,13 +62,20 @@ class App extends React.Component {
     }, console.log(event));
   }
 
+  changeHandle(event) {
+    this.setState(
+      {query: event.target.value}
+    );
+    console.log(event.target.value);
+  }
+
 
   render() {
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em>view goes here</h5></div>
+            <Search query={this.changeHandle}/>
           </div>
         </nav>
         <div className="row">
